@@ -23,27 +23,6 @@ min_max_years = FOREACH years GENERATE MIN(athletes.year) as min_year, MAX(athle
 country_list = DISTINCT (FOREACH athletes GENERATE country);
 
 
--- Find the top 5 countries by metal count
-athletes_by_country = GROUP athletes BY country; 
-metals_bycountry = FOREACH athletes_by_country GENERATE group as country, SUM(athletes.total) as metals_won;
-metals_by_country_sorted = ORDER metals_bycountry BY metals_won DESC;
-top5_winningest = LIMIT metals_by_country_sorted 5; 
-
-DUMP top5_winningest;
-
--- Get rid of swimming in the dataset and recalculate
-no_swimmers = FILTER athletes BY sport != 'Swimming';
-athletes_by_country = GROUP no_swimmers BY country; 
-metals_bycountry = FOREACH athletes_by_country GENERATE group as country, SUM(athletes.total) as metals_won;
-metals_by_country_sorted = ORDER metals_bycountry BY metals_won DESC;
-top5_winningest = LIMIT metals_by_country_sorted 5; 
 
 
--- Figure out how many countries only won a single metal
-athletes_by_country = GROUP athletes BY country; 
-metals_bycountry = FOREACH athletes_by_country GENERATE group as country, SUM(athletes.total) as metals_won;
-solo_winners = FILTER metals_bycountry BY metals_won == 1;
-countries_group = GROUP solo_winners ALL;
-country_count = FOREACH countries_group GENERATE COUNT(solo_winners);
-DUMP country_count;
 
