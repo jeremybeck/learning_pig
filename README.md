@@ -1,5 +1,5 @@
 # learning_pig
-Directory for my work learning Pig. 
+Directory for my work learning Pig. Most work will be carried out on my desktop, running Pig in local mode (launched using pig -x local). 
 
 ## Mortar Learning Pig Tutorial
 Initial Work includes the Mortar Learning Pig tutorial available [Mortar Pig Tutorial: Olympics]
